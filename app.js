@@ -19,10 +19,10 @@ app.use(express.static(publicPath));
 //
 
 app.use(express.json());
-
-app.get('/api/users', (req, res) => {
+app.use(express.urlencoded({ extended: true }));
+app.get('/api/users', async (req, res) => {
   try {
-    const users = User.find()
+    const users = await User.find({})
     res.status(200).send(users);
   } catch (e) {
     res.status(400).send({ error: e.message });
