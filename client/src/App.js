@@ -19,7 +19,7 @@ function App() {
   return (
     <div className='App'>
       {' '}
-      Hello World!
+      Hello Bank!
       <button onClick={getReq}>get</button>
       <button onClick={postReq}>post</button>
 
