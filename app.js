@@ -22,7 +22,8 @@ app.use(express.json());
 
 app.get('/api/users', (req, res) => {
   try {
-    res.status(200).send({ userName: 'Bob' });
+    const users = User.find()
+    res.status(200).send(users);
   } catch (e) {
     res.status(400).send({ error: e.message });
   }
@@ -30,7 +31,7 @@ app.get('/api/users', (req, res) => {
 
 
 app.post('/api/users', async (req, res)=>{
-  const user = new User({ name: "Betty" })
+  const user = new User({ id: 5 })
   await user.save()
   try{
     res.status(201).send(user)
