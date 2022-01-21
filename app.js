@@ -29,7 +29,7 @@ app.get('/api/users', (req, res) => {
 });
 
 
-app.post('/api/user', (req, res)=>{
+app.post('/api/users', (req, res)=>{
   const user = new User({ id: 2, credit: 100})
   try{
     res.status(201).send(user)
