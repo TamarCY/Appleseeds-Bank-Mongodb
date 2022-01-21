@@ -29,8 +29,9 @@ app.get('/api/users', (req, res) => {
 });
 
 
-app.post('/api/users', (req, res)=>{
+app.post('/api/users', async (req, res)=>{
   const user = new User({ id: 2, credit: 100})
+  await user.save()
   try{
     res.status(201).send(user)
   } catch(e){
@@ -47,7 +48,7 @@ const run = async () =>{
     console.log("user saved");
 }
 
-run()
+// run()
 
 //
 app.get('*', (req, res) => {
