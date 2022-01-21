@@ -29,7 +29,16 @@ app.get('/api/users', (req, res) => {
 });
 
 
-const user = new User({ id: 1, credit: 100, cash: 200, isActive: true})
+app.post('/api/user', (req, res)=>{
+  const user = new User({ id: 1, credit: 100, cash: 200, isActive: true})
+  try{
+    res.status(201).send(user)
+  } catch(e){
+    res.status(400).send({ error: e.message });
+  } 
+})
+
+// const user = new User({ id: 1, credit: 100, cash: 200, isActive: true})
 
 
 
