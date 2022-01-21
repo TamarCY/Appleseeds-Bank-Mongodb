@@ -31,9 +31,8 @@ app.get('/api/users', async (req, res) => {
 
 
 app.post('/api/users', async (req, res)=>{
-  const user = new User({ id: 5 })
-  await user.save()
   try{
+    const user =  await User.create({ id: 5 })
     res.status(201).send(user)
   } catch(e){
     res.status(400).send({ error: e.message });
@@ -44,12 +43,7 @@ app.post('/api/users', async (req, res)=>{
 
 
 
-const run = async () =>{
-    await user.save(),
-    console.log("user saved");
-}
 
-// run()
 
 //
 app.get('*', (req, res) => {
