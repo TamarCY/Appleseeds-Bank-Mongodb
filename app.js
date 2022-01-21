@@ -1,5 +1,7 @@
 const express = require('express');
-require("./db/mongoose")
+const User = require("./models/User")
+require("./db/mongoose");
+
 
 //
 const cors = require('cors');
