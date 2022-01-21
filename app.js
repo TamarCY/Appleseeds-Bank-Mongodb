@@ -30,7 +30,7 @@ app.get('/api/users', (req, res) => {
 
 
 app.post('/api/user', (req, res)=>{
-  const user = new User({ id: 1, credit: 100, cash: 200, isActive: true})
+  const user = new User({ id: 2, credit: 100})
   try{
     res.status(201).send(user)
   } catch(e){
