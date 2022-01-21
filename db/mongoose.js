@@ -11,4 +11,11 @@ mongoose.connect(process.env.MONGO_URI);
 
 const user = new User({ id: 1, credit: 100, cash: 200, isActive: true})
 
-user.save().then(()=> console.log("test user saved"))
+
+
+const run = async () =>{
+    await user.save(),
+    console.log("user saved");
+}
+
+run()
