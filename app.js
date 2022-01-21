@@ -1,4 +1,5 @@
 const express = require('express');
+require("./db/mongoose")
 
 //
 const cors = require('cors');
@@ -24,6 +25,18 @@ app.get('/api/users', (req, res) => {
     res.status(400).send({ error: e.message });
   }
 });
+
+
+const user = new User({ id: 1, credit: 100, cash: 200, isActive: true})
+
+
+
+const run = async () =>{
+    await user.save(),
+    console.log("user saved");
+}
+
+run()
 
 //
 app.get('*', (req, res) => {

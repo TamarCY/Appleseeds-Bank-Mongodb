@@ -7,15 +7,4 @@ require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 mongoose.connect(process.env.MONGO_URI);
 
 
-// Create basic user to chack the connections:
 
-const user = new User({ id: 1, credit: 100, cash: 200, isActive: true})
-
-
-
-const run = async () =>{
-    await user.save(),
-    console.log("user saved");
-}
-
-run()
