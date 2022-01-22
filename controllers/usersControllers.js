@@ -12,6 +12,16 @@ const getUsers = async (req, res) => {
 
 }
 
+const getUser = async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const user = await User.findOne({_id:userId});
+        res.status(200).send(user);
+    } catch(e) {
+        res.status(400).send({error: e.message})
+    }
+}
+
 // const getUsers = (req, res) => {
 //     try {
 //       res.status(200).send(loadUsers());
@@ -21,4 +31,4 @@ const getUsers = async (req, res) => {
 //   };
 
 
-module.exports = {getUsers}
+module.exports = {getUsers, getUser}
