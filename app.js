@@ -1,11 +1,14 @@
 const express = require('express');
 const User = require("./models/User")
 require("./db/mongoose");
+require("./controllers/usersControllers.js")
+const usersRouter = require("./routers/usersRoutes.js")
 
 
 //
 const cors = require('cors');
 const path = require('path');
+// const { getUsers } = require('./controllers/usersControllers.js');
 //
 
 const app = express();
@@ -20,24 +23,14 @@ app.use(express.static(publicPath));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.get('/api/users', async (req, res) => {
-  try {
-    const users = await User.find({})
-    res.status(200).send(users);
-  } catch (e) {
-    res.status(400).send({ error: e.message });
-  }
-});
+
+app.use("/api", usersRouter)
 
 
-app.post('/api/users', async (req, res)=>{
-  try{
-    const user =  await User.create({ id: 5 })
-    res.status(201).send(user)
-  } catch(e){
-    res.status(400).send({ error: e.message });
-  } 
-})
+
+
+
+// app.post('/api/users', getUsers)
 
 // const user = new User({ id: 1, credit: 100, cash: 200, isActive: true})
 
