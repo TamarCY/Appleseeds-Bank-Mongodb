@@ -20,7 +20,7 @@ const  App = () => {
   const renderUsers = () => {
     const result = users.map((element)=> {
       return (
-        <div>
+        <div key={element._id}>
           <h3>
             id: {element._id}
           </h3>
