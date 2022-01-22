@@ -36,8 +36,11 @@ const App = () => {
   };
 
   const depositRequest = async () => {
-    console.log(depositId);
-    
+      const response = await myApi.put("/users/deposit", {
+        id: depositId,
+        amount: depositAmount
+      }) 
+      console.log(response);   
   }
 
   const renderUsers = () => {

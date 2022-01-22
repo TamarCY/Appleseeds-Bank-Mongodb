@@ -39,7 +39,14 @@ const postUser = async (req, res) => {
 
 const depositToUser = async (req, res) => {
   try {
-    res.status(200).send(req.body);
+    const user = await User.findOne({ _id: req.body.id });
+    if(!user){
+        throw new Error("There is no user with this id")
+    }
+    const amount = +req.body.amount
+    user.cash = user.cash + amount;
+    const response = await user.save()
+    res.status(200).send(response);
   } catch (e) {
     res.status(400).send({ error: e.message });
   }
