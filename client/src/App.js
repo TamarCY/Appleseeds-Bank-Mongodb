@@ -36,25 +36,23 @@ const App = () => {
   };
 
   const depositRequest = async () => {
-      const response = await myApi.put("/users/deposit", {
-        id: depositId,
-        amount: depositAmount
-      }) 
-      console.log(response);   
-  }
+    const response = await myApi.put("/users/deposit", {
+      id: depositId,
+      amount: depositAmount
+    });
+    console.log(response);
+  };
 
   const renderUsers = () => {
     const result = users.map((element) => {
       return (
-        <div key={element._id}>
-          <h3>id: {element._id}</h3>
+        <div key={element._id} className="card">
+          <div className="content">
+          <div className="header">{element._id}</div>
           <div>credit: {element.credit}</div>
           <div>cash: {element.cash}</div>
-          {/* <button>deposit</button>
-          <button>withdraw</button>
-          <button>transfer</button>
-          <button>update credit</button> */}
-          <button>delete</button>
+          </div>
+          <button className="ui bottom attached button">delete</button>
         </div>
       );
     });
@@ -62,68 +60,93 @@ const App = () => {
   };
   return (
     <div className="App">
-      {/* {' '} */}
-      <h1>Hello Bank!</h1>
-      <button onClick={getRequest}>get all</button>
-      <br />
-      <br />
-      <input
-        type="text"
-        value={inputId}
-        onChange={(e) => setInputId(e.target.value)}
-      />
-      <button onClick={getOneUserRequest}>get one</button>
-      <br />
-      <br />
-      <label>
-        id:
-        <input
-          type="text"
-          value={postId}
-          onChange={(e) => setPostId(e.target.value)}
-        />
-      </label>
-      <label>
-        cash:
-        <input
-          type="text"
-          value={postCash}
-          onChange={(e) => setPostCash(e.target.value)}
-        />
-      </label>
-      <label>
-        credit:
-        <input
-          type="text"
-          value={postCredit}
-          onChange={(e) => setPostCredit(e.target.value)}
-        />
-      </label>
-      <button onClick={postRequest}>post</button>
-      <br />
-      <br />
-      <label>
-        deposit to id:
-        <input
-          type="text"
-          value={depositId}
-          onChange={(e) => {
-            setDepositId(e.target.value);
-          }}
-        />
-      </label>
-      <label>
-        amount:
-        <input
-          type="number"
-          value={depositAmount}
-          onChange={(e) => {
-            setDepositAmount(e.target.value);
-          }}
-        />
-      </label>
-      <button onClick={depositRequest}>deposit</button>
-      {renderUsers()}
+      <div className="App ui raised very padded text container segment">
+        <h1 className="ui dividing header">Hello Bank!</h1>
+        <button className="ui button" onClick={getRequest}>
+          Get all users
+        </button>
+        <br />
+        <br />
+        <form className="ui form">
+          <div className="field">
+            <input
+              type="text"
+              placeholder="Enter bank user Id"
+              value={inputId}
+              onChange={(e) => setInputId(e.target.value)}
+            />
+          </div>
+          <button className="ui button" onClick={getOneUserRequest}>
+            Get user
+          </button>
+        </form>
+        <br />
+        <br />
+        <h3 className="ui dividing header">Add new user</h3>
+        <form className="ui form">
+          <div className="fields">
+            <div className="field">
+              <label>id </label>
+              <input
+                type="text"
+                value={postId}
+                onChange={(e) => setPostId(e.target.value)}
+              />
+            </div>
+            <div className="field">
+              <label>cash</label>
+              <input
+                type="text"
+                value={postCash}
+                onChange={(e) => setPostCash(e.target.value)}
+              />
+            </div>
+            <div className="field">
+              <label>credit</label>
+              <input
+                type="text"
+                value={postCredit}
+                onChange={(e) => setPostCredit(e.target.value)}
+              />
+            </div>
+          </div>
+          <button className="ui button" onClick={postRequest}>
+            post
+          </button>
+        </form>
+        <br />
+        <br />
+        <h3 className="ui dividing header">Deposit</h3>
+        <form className="ui form">
+          <div className="fields">
+            <div className="field">
+              <label>id </label>
+              <input
+                type="text"
+                value={depositId}
+                onChange={(e) => {
+                  setDepositId(e.target.value);
+                }}
+              />
+            </div>
+            <div className="field">
+              <label>amount</label>
+              <input
+                type="number"
+                value={depositAmount}
+                onChange={(e) => {
+                  setDepositAmount(e.target.value);
+                }}
+              />
+            </div>
+          </div>
+          <button className="ui button" onClick={depositRequest}>
+            deposit
+          </button>
+        </form>
+        <br/>
+        <div className="ui cards">{renderUsers()}</div>
+      </div>
     </div>
   );
 };
