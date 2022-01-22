@@ -17,6 +17,7 @@ const App = () => {
   };
 
   const getOneUserRequest = async () => {
+    console.log("id:",inputId);
     const { data } = await myApi.get(`/users/${inputId}`);
     setInputId("");
     setUsers([data]);
@@ -67,7 +68,7 @@ const App = () => {
         </button>
         <br />
         <br />
-        <form className="ui form">
+        <div className="ui form">
           <div className="field">
             <input
               type="text"
@@ -79,11 +80,11 @@ const App = () => {
           <button className="ui button" onClick={getOneUserRequest}>
             Get user
           </button>
-        </form>
+        </div>
         <br />
         <br />
         <h3 className="ui dividing header">Add new user</h3>
-        <form className="ui form">
+        <div className="ui form">
           <div className="fields">
             <div className="field">
               <label>id </label>
@@ -113,11 +114,11 @@ const App = () => {
           <button className="ui button" onClick={postRequest}>
             post
           </button>
-        </form>
+        </div>
         <br />
         <br />
         <h3 className="ui dividing header">Deposit</h3>
-        <form className="ui form">
+        <div className="ui form">
           <div className="fields">
             <div className="field">
               <label>id </label>
@@ -143,7 +144,7 @@ const App = () => {
           <button className="ui button" onClick={depositRequest}>
             deposit
           </button>
-        </form>
+        </div>
         <br/>
         <div className="ui cards">{renderUsers()}</div>
       </div>
