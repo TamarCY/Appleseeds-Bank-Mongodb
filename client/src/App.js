@@ -3,15 +3,26 @@ import myApi from './api/Api';
 
 const  App = () => {
   const [users, setUsers] = useState([{id:8}]);
+  const [temp, setTemp] = useState([{}]);
+  const [inputId, setInputId] = useState('')
 
   
-  const getReq = async () => {
+  const getRequest = async () => {
     const { data } = await myApi.get('/users');
     setUsers(data)
     console.log(data);
   };
 
-  const postReq = async () => {
+  const getOneUserRequest = async () => {
+    // const data={}
+    const { data } = await myApi.get(`/users/${inputId}`);
+    setUsers([data])
+    console.log(data);
+  };
+
+
+
+  const postRequest = async () => {
     const { data } = await myApi.post('/users');
     console.log(data);
   };
@@ -43,9 +54,12 @@ const  App = () => {
   return (
     <div className='App'>
       {/* {' '} */}
-      Hello Bank!
-      <button onClick={getReq}>get</button>
-      <button onClick={postReq}>post</button>
+      <h1>Hello Bank!</h1>
+      <br/>
+      <input type="text" value={inputId} onChange={e => setInputId(e.target.value)}/>
+      <button onClick={getRequest}>get all</button>
+      <button onClick={getOneUserRequest}>get one</button>
+      <button onClick={postRequest}>post</button>
       {renderUsers()}
 
     </div>

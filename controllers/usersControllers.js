@@ -18,6 +18,7 @@ const getUser = async (req, res) => {
         const user = await User.findOne({_id:userId});
         res.status(200).send(user);
     } catch(e) {
+
         res.status(400).send({error: e.message})
     }
 }
