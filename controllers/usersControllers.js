@@ -23,6 +23,21 @@ const getUser = async (req, res) => {
     }
 }
 
+const postUser = async (req, res) => {
+    try {
+       const user = new User ({
+           id: req.body.id,
+           credit: req.body.credit,
+           cash: req.body.cash,
+           isActive: req.body.isActive
+       })
+       await user.save()
+       res.status(201).send(user)
+    } catch (e) {
+        res.status(400).send({error: e.message})
+    }
+}
+
 // const getUsers = (req, res) => {
 //     try {
 //       res.status(200).send(loadUsers());
@@ -32,4 +47,4 @@ const getUser = async (req, res) => {
 //   };
 
 
-module.exports = {getUsers, getUser}
+module.exports = {getUsers, getUser, postUser}

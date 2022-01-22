@@ -30,9 +30,7 @@ app.use("/api", usersRouter)
 
 
 
-// app.post('/api/users', getUsers)
 
-// const user = new User({ id: 1, credit: 100, cash: 200, isActive: true})
 
 
 

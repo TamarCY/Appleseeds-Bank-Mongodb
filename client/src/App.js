@@ -3,8 +3,10 @@ import myApi from './api/Api';
 
 const  App = () => {
   const [users, setUsers] = useState([{id:8}]);
-  const [temp, setTemp] = useState([{}]);
   const [inputId, setInputId] = useState('')
+  const [postId, setPostId] = useState(undefined)
+  const [postCash, setPostCash] = useState(undefined)
+  const [postCredit, setPostCredit] = useState(undefined)
 
   
   const getRequest = async () => {
@@ -14,8 +16,8 @@ const  App = () => {
   };
 
   const getOneUserRequest = async () => {
-    // const data={}
     const { data } = await myApi.get(`/users/${inputId}`);
+    setInputId("")
     setUsers([data])
     console.log(data);
   };
@@ -23,7 +25,14 @@ const  App = () => {
 
 
   const postRequest = async () => {
-    const { data } = await myApi.post('/users');
+    const { data } = await myApi.post('/users', {
+      id: postId,
+      cash: postCash,
+      credit: postCredit
+    });
+    setPostId("");
+    setPostCash("");
+    setPostCredit("");
     console.log(data);
   };
 
@@ -55,11 +64,29 @@ const  App = () => {
     <div className='App'>
       {/* {' '} */}
       <h1>Hello Bank!</h1>
+      <button onClick={getRequest}>get all</button>
+      <br/>
       <br/>
       <input type="text" value={inputId} onChange={e => setInputId(e.target.value)}/>
-      <button onClick={getRequest}>get all</button>
       <button onClick={getOneUserRequest}>get one</button>
-      <button onClick={postRequest}>post</button>
+      <br/>
+      <br/>
+      {/* <form> */}
+        <label>
+          id:
+          <input type="text" value={postId} onChange={e => setPostId(e.target.value)}/>
+        </label>
+        <label>
+          cash:
+          <input type="text" value={postCash} onChange={e => setPostCash(e.target.value)}/>
+        </label>
+        <label>
+          credit:
+          <input type="text" value={postCredit} onChange={e => setPostCredit(e.target.value)}/>
+        </label>
+        <button onClick={postRequest}>post</button>
+      {/* </form> */}
+
       {renderUsers()}
 
     </div>
